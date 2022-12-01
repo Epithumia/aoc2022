@@ -10,5 +10,8 @@ Cargo.lock
 **/*.rs.bk
 **/*.bak
 
+# Python
+**/__pycache__
+
 # AoC inputs
 /input

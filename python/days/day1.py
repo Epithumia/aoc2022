@@ -1,5 +1,5 @@
 def day1():
-    with open('input/input1.txt', 'r') as f:
+    with open('../input/input1.txt', 'r') as f:
         data = f.read()
         data = data.split('\n')
         data.append('')
