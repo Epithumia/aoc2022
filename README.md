@@ -1,2 +1,2 @@
-# aoc2022
-Codes pour les puzzles de l'AoC2022
+# Aoc2022
+Mes solutions pour les puzzles de l'AoC 2022
