@@ -1,32 +1,32 @@
 mod aoc2022;
 
 use crate::aoc2022::day1::day1;
-/*use crate::aoc2021::day2::day2;
-use crate::aoc2021::day3::day3;
-use crate::aoc2021::day4::day4;
-use crate::aoc2021::day5::day5;
-use crate::aoc2021::day6::day6;
-use crate::aoc2021::day6::day6v2;
-use crate::aoc2021::day7::day7;
-use crate::aoc2021::day7::day7v2;
-use crate::aoc2021::day8::day8;
-use crate::aoc2021::day9::day9;
-use crate::aoc2021::day10::day10;
-use crate::aoc2021::day11::day11;
-use crate::aoc2021::day12::day12;
-use crate::aoc2021::day12::day12v2;
-use crate::aoc2021::day13::day13;
-use crate::aoc2021::day14::day14;
-use crate::aoc2021::day15::day15;
-use crate::aoc2021::day16::day16;
-use crate::aoc2021::day17::day17;
-use crate::aoc2021::day19::day19;
-use crate::aoc2021::day20::day20;
-use crate::aoc2021::day21::day21;
-use crate::aoc2021::day22::day22;
-use crate::aoc2021::day23::day23;
-use crate::aoc2021::day24::day24;
-use crate::aoc2021::day25::day25;
+use crate::aoc2022::day2::day2;
+/*use crate::aoc2022::day3::day3;
+use crate::aoc2022::day4::day4;
+use crate::aoc2022::day5::day5;
+use crate::aoc2022::day6::day6;
+use crate::aoc2022::day6::day6v2;
+use crate::aoc2022::day7::day7;
+use crate::aoc2022::day7::day7v2;
+use crate::aoc2022::day8::day8;
+use crate::aoc2022::day9::day9;
+use crate::aoc2022::day10::day10;
+use crate::aoc2022::day11::day11;
+use crate::aoc2022::day12::day12;
+use crate::aoc2022::day12::day12v2;
+use crate::aoc2022::day13::day13;
+use crate::aoc2022::day14::day14;
+use crate::aoc2022::day15::day15;
+use crate::aoc2022::day16::day16;
+use crate::aoc2022::day17::day17;
+use crate::aoc2022::day19::day19;
+use crate::aoc2022::day20::day20;
+use crate::aoc2022::day21::day21;
+use crate::aoc2022::day22::day22;
+use crate::aoc2022::day23::day23;
+use crate::aoc2022::day24::day24;
+use crate::aoc2022::day25::day25;
 */
 use rdcl_aoc_helpers::args::get_args;
 
@@ -37,8 +37,8 @@ fn main() {
 
     match day {
         1 => day1(&path.to_string()),
-        /*2 => day2(&path.to_string()),
-        3 => day3(&path.to_string()),
+        2 => day2(&path.to_string()),
+        /*3 => day3(&path.to_string()),
         4 => day4(&path.to_string()),
         5 => day5(&path.to_string()),
         6 => day6(&path.to_string()),

@@ -15,3 +15,6 @@ Cargo.lock
 
 # AoC inputs
 /input
+
+# PyCharm
+.idea
