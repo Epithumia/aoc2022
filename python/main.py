@@ -6,6 +6,7 @@ writes to an output file and parses command line arguments
 import argparse
 from days.day1 import day1
 from days.day2 import day2
+from days.day3 import day3
 
 
 def main():
@@ -21,7 +22,7 @@ def main():
     if int(args.day[0]) == 2:
         day2()
     if int(args.day[0]) == 3:
-        pass
+        day3()
     if int(args.day[0]) == 4:
         pass
     if int(args.day[0]) == 5:

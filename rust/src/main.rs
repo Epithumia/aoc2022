@@ -2,8 +2,8 @@ mod aoc2022;
 
 use crate::aoc2022::day1::day1;
 use crate::aoc2022::day2::day2;
-/*use crate::aoc2022::day3::day3;
-use crate::aoc2022::day4::day4;
+use crate::aoc2022::day3::day3;
+/*use crate::aoc2022::day4::day4;
 use crate::aoc2022::day5::day5;
 use crate::aoc2022::day6::day6;
 use crate::aoc2022::day6::day6v2;
@@ -38,8 +38,8 @@ fn main() {
     match day {
         1 => day1(&path.to_string()),
         2 => day2(&path.to_string()),
-        /*3 => day3(&path.to_string()),
-        4 => day4(&path.to_string()),
+        3 => day3(&path.to_string()),
+        /*4 => day4(&path.to_string()),
         5 => day5(&path.to_string()),
         6 => day6(&path.to_string()),
         66 => day6v2(&path.to_string()),
