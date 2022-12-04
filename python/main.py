@@ -7,6 +7,7 @@ import argparse
 from days.day1 import day1
 from days.day2 import day2
 from days.day3 import day3
+from days.day4 import day4
 
 
 def main():
@@ -24,7 +25,7 @@ def main():
     if int(args.day[0]) == 3:
         day3()
     if int(args.day[0]) == 4:
-        pass
+        day4()
     if int(args.day[0]) == 5:
         pass
     if int(args.day[0]) == 6:
