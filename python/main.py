@@ -9,6 +9,7 @@ from days.day2 import day2
 from days.day3 import day3
 from days.day4 import day4
 from days.day5 import day5
+from days.day6 import day6
 
 
 def main():
@@ -30,7 +31,7 @@ def main():
     if int(args.day[0]) == 5:
         day5()
     if int(args.day[0]) == 6:
-        pass
+        day6()
     if int(args.day[0]) == 7:
         pass
     if int(args.day[0]) == 8:
