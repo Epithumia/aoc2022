@@ -79,6 +79,7 @@ class File(object):
     def __init__(self, name, size):
         self.name = name
         self._size = int(size)
+        self.parent = None
 
     def __repr__(self):
         return f"file {self.name}  - {self.size()}"
