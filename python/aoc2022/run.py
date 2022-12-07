@@ -1,16 +1,11 @@
-#! /usr/bin/env python
-"""
-A skeleton python script which reads from an input file,
-writes to an output file and parses command line arguments
-"""
 import argparse
-from days.day1 import day1
-from days.day2 import day2
-from days.day3 import day3
-from days.day4 import day4
-from days.day5 import day5
-from days.day6 import day6
-from days.day7 import day7
+from aoc2022.days.day1 import day1
+from aoc2022.days.day2 import day2
+from aoc2022.days.day3 import day3
+from aoc2022.days.day4 import day4
+from aoc2022.days.day5 import day5
+from aoc2022.days.day6 import day6
+from aoc2022.days.day7 import day7
 
 
 def main():
