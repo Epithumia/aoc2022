@@ -1,6 +1,6 @@
 def day7():
     with open('../input/input7.txt', 'r') as f:
-        data = f.read().split('\n')[:-1]
+        data = f.read().splitlines()
 
     fs = Directory('/')
     current = fs
@@ -37,12 +37,11 @@ class Directory(object):
         self.nodes = dict()
 
     def __repr__(self):
-        r = self.name + ":\n"
+        r = f" dir  {self.name} - {self.size()}\n"
         for node in self.nodes:
-            if isinstance(self.nodes[node], Directory):
-                r += " dir " + str(self.nodes[node].size()) + " " + str(self.nodes[node]) + "\n"
-            else:
-                r += " file " + str(self.nodes[node].size()) + " " + str(self.nodes[node]) + "\n"
+            s = str(self.nodes[node])
+            for line in s.splitlines():
+                r += "-" + line + "\n"
         return r
 
     def add_node(self, node):
@@ -61,9 +60,11 @@ class Directory(object):
 
     def find_size(self, val):
         if self.size() > val:
-            return sum([self.nodes[node].find_size(val) for node in self.nodes])
+            return sum([self.nodes[node].find_size(val) for node in
+                        list(filter(lambda x: isinstance(self.nodes[x], Directory), self.nodes))])
         else:
-            return sum([self.nodes[node].find_size(val) for node in self.nodes]) + self.size()
+            return sum([self.nodes[node].find_size(val) for node in
+                        list(filter(lambda x: isinstance(self.nodes[x], Directory), self.nodes))]) + self.size()
 
     def find_dirs(self):
         list_dirs = []
@@ -80,10 +81,7 @@ class File(object):
         self._size = int(size)
 
     def __repr__(self):
-        return self.name
+        return f"file {self.name}  - {self.size()}"
 
     def size(self):
         return self._size
-
-    def find_size(self, val):
-        return 0
