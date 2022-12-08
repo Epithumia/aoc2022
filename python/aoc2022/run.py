@@ -6,6 +6,7 @@ from aoc2022.days.day4 import day4
 from aoc2022.days.day5 import day5
 from aoc2022.days.day6 import day6
 from aoc2022.days.day7 import day7
+from aoc2022.days.day8 import day8
 
 
 def main():
@@ -31,7 +32,7 @@ def main():
     if int(args.day[0]) == 7:
         day7()
     if int(args.day[0]) == 8:
-        pass
+        day8()
     if int(args.day[0]) == 9:
         pass
     if int(args.day[0]) == 10:
