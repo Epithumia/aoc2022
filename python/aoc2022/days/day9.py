@@ -8,6 +8,7 @@ def day9():
 
 
 def rope(moves, length):
+    directions = {'U': [0, 1], 'D': [0, -1], 'L': [-1, 0], 'R': [1, 0]}
     visited = {}
     pos = [[0, 0] for _ in range(length)]
     visited[str(pos[length - 1])] = 1
@@ -16,14 +17,8 @@ def rope(moves, length):
         direction, dist = move.split(' ')
         dist = int(dist)
         for _ in range(dist):
-            if direction == 'U':
-                pos[0][1] += 1
-            if direction == 'D':
-                pos[0][1] += -1
-            if direction == 'L':
-                pos[0][0] += -1
-            if direction == 'R':
-                pos[0][0] += 1
+            pos[0][0] += directions[direction][0]
+            pos[0][1] += directions[direction][1]
             for i in range(1, length):
                 pos[i] = follow(pos[i - 1], pos[i])
             visited[str(pos[length - 1])] = 1
