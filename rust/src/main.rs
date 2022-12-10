@@ -9,8 +9,8 @@ use crate::aoc2022::day6::day6;
 /*use crate::aoc2022::day7::day7; Not working */
 use crate::aoc2022::day8::day8;
 use crate::aoc2022::day9::day9;
-/*use crate::aoc2022::day10::day10;
-use crate::aoc2022::day11::day11;
+use crate::aoc2022::day10::day10;
+/*use crate::aoc2022::day11::day11;
 use crate::aoc2022::day12::day12;
 use crate::aoc2022::day13::day13;
 use crate::aoc2022::day14::day14;
@@ -42,8 +42,8 @@ fn main() {
         // 7 => day7(&path.to_string()), // Not working
         8 => day8(&path.to_string()),
         9 => day9(&path.to_string()),
-        /*10 => day10(&path.to_string()),
-        11 => day11(&path.to_string()),
+        10 => day10(&path.to_string()),
+        /*11 => day11(&path.to_string()),
         12 => day12(&path.to_string()),
         13 => day13(&path.to_string()),
         14 => day14(&path.to_string()),
