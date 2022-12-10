@@ -4,7 +4,6 @@ def day9():
 
     # print(visited)
     print('Part 1: ', rope(data, 2))
-
     print('Part 2: ', rope(data, 10))
 
 
@@ -32,35 +31,14 @@ def rope(moves, length):
 
 
 def follow(pos_h, pos_t):
-    if pos_h == pos_t:
-        return pos_t
-    if pos_h[0] == pos_t[0]:  # Same X
-        if pos_h[1] - pos_t[1] > 1:
-            pos_t[1] += (pos_h[1] - pos_t[1]) - 1
-        elif pos_h[1] - pos_t[1] < -1:
-            pos_t[1] += (pos_h[1] - pos_t[1]) + 1
-        return pos_t
-    if pos_h[1] == pos_t[1]:  # Same Y
-        if pos_h[0] - pos_t[0] > 1:
-            pos_t[0] += pos_h[0] - pos_t[0] - 1
-        elif pos_h[0] - pos_t[0] < -1:
-            pos_t[0] += pos_h[0] - pos_t[0] + 1
-        return pos_t
-    # Diagonal
-    if abs(pos_h[1] - pos_t[1]) > abs(pos_h[0] - pos_t[0]) and abs(pos_h[1] - pos_t[1]) > 1:  # move Y first
-        pos_t[0] += pos_h[0] - pos_t[0]
-        return follow(pos_h, pos_t)
-    elif abs(pos_h[1] - pos_t[1]) < abs(pos_h[0] - pos_t[0]) and abs(pos_h[0] - pos_t[0]) > 1:  # move X first
-        pos_t[1] += pos_h[1] - pos_t[1]
-        return follow(pos_h, pos_t)
-    elif abs(pos_h[1] - pos_t[1]) == abs(pos_h[0] - pos_t[0]) > 1:  # move both
-        if pos_h[0] > pos_t[0]:
-            pos_t[0] += pos_h[0] - pos_t[0] - 1
-        else:
-            pos_t[0] += pos_h[0] - pos_t[0] + 1
-        if pos_h[1] > pos_t[1]:
-            pos_t[1] += pos_h[1] - pos_t[1] - 1
-        else:
-            pos_t[1] += pos_h[1] - pos_t[1] + 1
-        return follow(pos_h, pos_t)
+    dx = abs(pos_h[0] - pos_t[0])
+    dy = abs(pos_h[1] - pos_t[1])
+    vx = sign(pos_h[0] - pos_t[0]) * int(((dx >= 1) and (dy > 1)) or (dx > 1))
+    vy = sign(pos_h[1] - pos_t[1]) * int(((dx > 1) and (dy >= 1)) or (dy > 1))
+    pos_t[0] += vx
+    pos_t[1] += vy
     return pos_t
+
+
+def sign(x):
+    return (x > 0) - (x < 0)
