@@ -8,7 +8,7 @@ def day11():
     for m in range(len(data) // 7):
         monkeys.append(Monkey(data[7 * m:(7 * m + 7)]))
 
-    for i in range(20):
+    for _ in range(20):
         for monkey in monkeys:
             monkey.turn()
 
@@ -22,7 +22,7 @@ def day11():
         monkeys.append(Monkey(data[7 * m:(7 * m + 7)]))
         worry *= monkeys[m].test
 
-    for i in range(10000):
+    for _ in range(10000):
         for monkey in monkeys:
             monkey.turn(worry)
 
