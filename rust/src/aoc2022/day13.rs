@@ -10,7 +10,7 @@ pub fn day13(path: &String) {
     let mut i = 1;
 
     for packet in packets.chunks(2) {
-        if packet[0].clone() > packet[1].clone() {
+        if &packet[0] > &packet[1] {
             score1 += i;
         }
         i += 1;
@@ -30,6 +30,38 @@ pub fn day13(path: &String) {
     }
 
     println!("Part 2: {}", score2);
+    
+}
+
+pub fn day13b(path: &String) {
+    println!("Day 13");
+    let packets:Vec<Packet> = File::open(path).read_lines::<String>(1).filter(|s| s.len() > 0).map(|l| {let p:Packet = serde_json::from_str(&l.to_string()).unwrap(); return p;}).collect();
+    let mut score1 = 0;
+    let mut i = 1;
+
+    for packet in packets.chunks(2) {
+        if packet[0] > packet[1] {
+            score1 += i;
+        }
+       
+        i += 1;
+    }
+
+    println!("Part 1: {}", score1);
+
+    let mut pos2 = 1;
+    let mut pos6 = 2;
+
+    for packet in packets {
+        if packet > serde_json::from_str("[[2]]").unwrap() {
+            pos2 += 1;
+        }
+        if packet > serde_json::from_str("[[6]]").unwrap() {
+            pos6 += 1;
+        }
+    }
+
+    println!("Part 2: {}",  pos2 * pos6);
     
 }
 
@@ -56,8 +88,8 @@ impl Ord for Packet {
             }
             (Packet::P(l), Packet::P(r)) => {
                 if l.len() == 0 && r.len() > 0 {return Greater;}
+                if l.len() == 0 {return Equal;}
                 if r.len() == 0 && l.len() > 0 {return Less;}
-                if l.len() == 0 && r.len() == 0 {return Equal;}
                 let res = l[0].cmp(&r[0]);
                 if res != Equal {return res;}
                 let lc = Packet::P(l.clone()[1..].to_vec());

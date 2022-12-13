@@ -13,6 +13,7 @@ use crate::aoc2022::day10::day10;
 use crate::aoc2022::day11::day11;
 use crate::aoc2022::day12::day12;
 use crate::aoc2022::day13::day13;
+use crate::aoc2022::day13::day13b;
 /*use crate::aoc2022::day14::day14;
 use crate::aoc2022::day15::day15;
 use crate::aoc2022::day16::day16;
@@ -46,6 +47,7 @@ fn main() {
         11 => day11(&path.to_string()),
         12 => day12(&path.to_string()),
         13 => day13(&path.to_string()),
+        113 => day13b(&path.to_string()),
         /*14 => day14(&path.to_string()),
         15 => day15(&path.to_string()),
         16 => day16(&path.to_string()),
