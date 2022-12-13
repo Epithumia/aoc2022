@@ -1,3 +1,4 @@
+from ast import literal_eval
 from functools import cmp_to_key
 
 from aoc2022.days.day9 import sign
@@ -34,7 +35,7 @@ def day13():
 
 def compare(left, right):
     if isinstance(left, str):
-        return compare(eval(left), eval(right))
+        return compare(literal_eval(left), literal_eval(right))
     if isinstance(left, int) and isinstance(right, int):
         return sign(left - right)
     if isinstance(left, int) and isinstance(right, list):
