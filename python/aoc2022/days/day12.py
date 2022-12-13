@@ -78,7 +78,6 @@ class JungleMap(object):
         heap.heappush(pq, (0, starting_node))
 
         while pq:
-            # go greedily by always extending the shorter cost nodes first
             _, node = heap.heappop(pq)
             visited.add(node)
 
