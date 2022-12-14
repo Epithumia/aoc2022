@@ -31,23 +31,7 @@ def day14():
         limits['right'] = max(limits['right'], x)
         limits['down'] = max(limits['down'], y)
 
-    abyss = False
-    while not abyss:
-        sand = (500, 0)
-        can_fall = True
-        while can_fall:
-            if sand[0] < limits['left'] or sand[0] > limits['right'] or sand[1] > limits['down']:
-                abyss = True
-                break
-            if (sand[0], sand[1] + 1) not in cave:
-                sand = (sand[0], sand[1] + 1)
-            elif (sand[0] - 1, sand[1] + 1) not in cave:
-                sand = (sand[0] - 1, sand[1] + 1)
-            elif (sand[0] + 1, sand[1] + 1) not in cave:
-                sand = (sand[0] + 1, sand[1] + 1)
-            else:
-                cave[sand] = 'O'
-                can_fall = False
+    fill(cave, limits, True)
 
     score1 = 0
     for v in cave.values():
@@ -56,23 +40,7 @@ def day14():
 
     print('Part 1:', score1)
 
-    full = False
-    while not full:
-        sand = (500, 0)
-        can_fall = True
-        while can_fall:
-            if (500, 0) in cave.keys():
-                full = True
-                break
-            if (sand[0], sand[1] + 1) not in cave and sand[1] + 1 < limits['down'] + 2:
-                sand = (sand[0], sand[1] + 1)
-            elif (sand[0] - 1, sand[1] + 1) not in cave and sand[1] + 1 < limits['down'] + 2:
-                sand = (sand[0] - 1, sand[1] + 1)
-            elif (sand[0] + 1, sand[1] + 1) not in cave and sand[1] + 1 < limits['down'] + 2:
-                sand = (sand[0] + 1, sand[1] + 1)
-            else:
-                cave[sand] = 'O'
-                can_fall = False
+    fill(cave, limits, False)
 
     score2 = 0
     for v in cave.values():
@@ -80,3 +48,26 @@ def day14():
             score2 += 1
 
     print('Part 2:', score2)
+
+
+def fill(cave, limits, bottomless=True):
+    stop = False
+    while not stop:
+        sand = (500, 0)
+        can_fall = True
+        while can_fall:
+            if bottomless and (sand[1] > limits['down'] or sand[0] < limits['left'] or sand[0] > limits['right']):
+                stop = True
+                break
+            if not bottomless and (500, 0) in cave.keys():
+                stop = True
+                break
+            if (sand[0], sand[1] + 1) not in cave and (bottomless or sand[1] + 1 < limits['down'] + 2):
+                sand = (sand[0], sand[1] + 1)
+            elif (sand[0] - 1, sand[1] + 1) not in cave and (bottomless or sand[1] + 1 < limits['down'] + 2):
+                sand = (sand[0] - 1, sand[1] + 1)
+            elif (sand[0] + 1, sand[1] + 1) not in cave and (bottomless or sand[1] + 1 < limits['down'] + 2):
+                sand = (sand[0] + 1, sand[1] + 1)
+            else:
+                cave[sand] = 'O'
+                can_fall = False
