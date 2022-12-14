@@ -1,5 +1,6 @@
 import argparse
 from aoc2022.days.day1 import day1
+from aoc2022.days.day14 import day14
 from aoc2022.days.day2 import day2
 from aoc2022.days.day3 import day3
 from aoc2022.days.day4 import day4
@@ -49,7 +50,7 @@ def main():
     if int(args.day[0]) == 13:
         day13()
     if int(args.day[0]) == 14:
-        pass
+        day14()
     if int(args.day[0]) == 15:
         pass
     if int(args.day[0]) == 16:
