@@ -57,6 +57,8 @@ def main():
         day114()
     if int(args.day[0]) == 15:
         day15()
+    if int(args.day[0]) == 115:
+        day15(True)
     if int(args.day[0]) == 16:
         pass
     if int(args.day[0]) == 17:

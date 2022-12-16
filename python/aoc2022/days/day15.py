@@ -3,8 +3,7 @@ from pulp import LpProblem, LpMinimize, LpVariable, LpInteger, LpBinary, value, 
 from tqdm import tqdm
 
 
-def day15():
-    test = False
+def day15(test=False):
     if test:
         target = 10
         with open('../input/test15.txt', 'r') as f:
@@ -23,7 +22,7 @@ def day15():
         sx, sy, bx, by = parse.parse(format_string, row)
         sensors.append((sx, sy))
         beacons.append((bx, by))
-        dist = manhattan((sx, sy), (bx, by))
+        dist = abs(sx - bx) + abs(sy - by)
         limits['left'] = min(limits['left'], sx - dist)
         limits['right'] = max(limits['right'], sx + dist)
         limits['up'] = min(limits['up'], sy - dist)
@@ -31,16 +30,10 @@ def day15():
         dists[(sx, sy)] = dist
 
     m = measure(target, sensors, beacons, dists, limits)
-
     print('Part 1:', m)
 
     f = tune(sensors, dists, bounds)
-
     print('Part 2:', f)
-
-
-def manhattan(p1, p2):
-    return abs(p2[0] - p1[0]) + abs(p2[1] - p1[1])
 
 
 def measure(target, sensors, beacons, dists, limits):
@@ -74,5 +67,5 @@ def tune(sensors, dists, limits):
         prob += (s[0] - x) + (s[1] - y) + 40000000 * e4 >= dists[s] + 1
         prob += e1 + e2 + e3 + e4 == 3
         i += 1
-    prob.solve(PULP_CBC_CMD(msg=False))
+    prob.solve(PULP_CBC_CMD(msg=True))
     return int(value(prob.objective))
