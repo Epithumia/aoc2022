@@ -56,43 +56,41 @@ class Droplet(object):
         return sum([c.surface() for c in self.bubbles.values()])
 
     def get_bounds(self):
-        xmin, xmax = 1e7, 0
-        ymin, ymax = 1e7, 0
-        zmin, zmax = 1e7, 0
+        x_min, x_max = 1e7, 0
+        y_min, y_max = 1e7, 0
+        z_min, z_max = 1e7, 0
         for coords in self.cubes.keys():
             x, y, z = coords
-            xmin = min(xmin, x)
-            xmax = max(xmax, x)
-            ymin = min(ymin, y)
-            ymax = max(ymax, y)
-            zmin = min(zmin, z)
-            zmax = max(zmax, z)
-        return xmin, xmax, ymin, ymax, zmin, zmax
+            x_min = min(x_min, x)
+            x_max = max(x_max, x)
+            y_min = min(y_min, y)
+            y_max = max(y_max, y)
+            z_min = min(z_min, z)
+            z_max = max(z_max, z)
+        return x_min, x_max, y_min, y_max, z_min, z_max
 
     def add_bubbles(self):
-        xmin, xmax, ymin, ymax, zmin, zmax = self.get_bounds()
+        x_min, x_max, y_min, y_max, z_min, z_max = self.get_bounds()
 
-        for x in range(xmin - 5, xmax + 5):
-            for y in range(ymin - 5, ymax + 5):
-                for z in range(zmin - 5, zmax + 5):
+        for x in range(x_min - 1, x_max + 1):
+            for y in range(y_min - 1, y_max + 1):
+                for z in range(z_min - 1, z_max + 1):
                     if (x, y, z) not in self.cubes.keys():
                         self.add_cube((x, y, z), True)
-        return xmin, ymin, zmin
+        return x_min, y_min, z_min
 
     def outside_surface(self):
-        xmin, ymin, zmin = self.add_bubbles()
+        x_min, y_min, z_min = self.add_bubbles()
         queue = SimpleQueue()
-        queue.put((xmin - 5, ymin - 5, zmin - 5))
+        queue.put((x_min - 1, y_min - 1, z_min - 1))
         while not queue.empty():
             x, y, z = queue.get()
-            b = self.bubbles.get((x, y, z), Cube(-10, -10, -10))
-            neighbors = b.neighbors.copy()
-            for n in neighbors:
-                n.remove_neighbor(b)
-                b.remove_neighbor(n)
-                queue.put((n.x, n.y, n.z))
-            if b.surface() == 6 and b.x != -10:
-                self.bubbles.pop((x, y, z))
+            if (x, y, z) in self.bubbles:
+                b = self.bubbles.pop((x, y, z))
+                for n in b.neighbors:
+                    n.remove_neighbor(b)
+                    queue.put((n.x, n.y, n.z))
+                b.neighbors.clear()
 
         return self.surface() - self.bubble_surface()
 
