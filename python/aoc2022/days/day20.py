@@ -40,10 +40,7 @@ def do_round(crypted, decrypted, length, p=0):
     for di in tqdm(range(len(crypted)), position=p, leave=False):
         d = crypted[di]
         pos = decrypted[(d, di)]
-        if d % length == 0:
-            new_pos = pos
-        else:
-            new_pos = (pos + d) % (length - 1)
+        new_pos = (pos + d) % (length - 1)
         decrypted[(d, di)] = new_pos
         for o in decrypted.keys():  # For all items
             if o != (d, di) and decrypted[o] > pos:
