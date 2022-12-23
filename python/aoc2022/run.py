@@ -21,6 +21,7 @@ from aoc2022.days.day18 import day18
 from aoc2022.days.day19 import day19
 from aoc2022.days.day20 import day20
 from aoc2022.days.day21 import day21
+from aoc2022.days.day22 import day22
 from aoc2022.days.day23 import day23
 
 
@@ -79,7 +80,7 @@ def main():
     if int(args.day[0]) == 21:
         day21()
     if int(args.day[0]) == 22:
-        pass
+        day22()
     if int(args.day[0]) == 23:
         day23()
     if int(args.day[0]) == 24:
