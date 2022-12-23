@@ -1,7 +1,5 @@
-from tqdm import tqdm
-from parse import parse
-from pulp import LpProblem, LpMinimize, LpVariable, LpInteger, LpBinary, value, PULP_CBC_CMD
 import sympy as sym
+from parse import parse
 
 
 def day21():
