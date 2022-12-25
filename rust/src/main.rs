@@ -23,9 +23,9 @@ use crate::aoc2022::day20::day20;
 use crate::aoc2022::day21::day21;
 use crate::aoc2022::day22::day22;
 use crate::aoc2022::day23::day23;
-use crate::aoc2022::day24::day24;
+use crate::aoc2022::day24::day24;*/
 use crate::aoc2022::day25::day25;
-*/
+
 use rdcl_aoc_helpers::args::get_args;
 
 fn main() {
@@ -57,8 +57,8 @@ fn main() {
         21 => day21(&path.to_string()),
         22 => day22(&path.to_string()),
         23 => day23(&path.to_string()),
-        24 => day24(&path.to_string()),
-        25 => day25(&path.to_string()),*/
+        24 => day24(&path.to_string()),*/
+        25 => day25(&path.to_string()),
         _ => println!("Nothing to do"),
         // Jour non codé
     }
