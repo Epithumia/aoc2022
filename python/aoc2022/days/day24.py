@@ -77,17 +77,13 @@ def get_neighbors(row, col, minute, w, h):
 
 @cache
 def get_spot(row, col, minute, w, h):
-    if row == -1 and col == 0:
-        return '.'
-    if row == h and col == w - 1:
+    if (row == -1 and col == 0) or (row == h and col == w - 1):
         return '.'
     if row <= -1 or row >= h or col <= -1 or col >= w:
         return '#'
     if minute == 0:
         return cave[(row, col)]
     a = get_spot((row - minute) % h, col, 0, w, h)
-    if a == '#':
-        return '#'
     if a != 'v':
         a = ''
     b = get_spot((row + minute) % h, col, 0, w, h)
