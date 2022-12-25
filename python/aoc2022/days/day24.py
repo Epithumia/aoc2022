@@ -1,5 +1,8 @@
 from collections import defaultdict
 import heapq as heap
+from functools import cache
+
+cave = defaultdict(lambda: '#')
 
 
 def day24():
@@ -9,7 +12,7 @@ def day24():
     height = len(data)
     width = len(data[0])
 
-    cave = defaultdict(lambda: '#')
+    # cave = defaultdict(lambda: '#')
 
     for r in range(1, height - 1):
         for c in range(1, width - 1):
@@ -18,7 +21,7 @@ def day24():
     width -= 2
     height -= 2
 
-    p, c = dijkstra((0, 0, 1), cave, width, height, (height - 1, width - 1))
+    p, c = dijkstra((0, 0, 1), width, height, (height - 1, width - 1))
 
     cost = 1e10
 
@@ -28,14 +31,14 @@ def day24():
 
     print('Part 1:', cost + 1)
 
-    p, c = dijkstra((height - 1, width - 1, cost + 2), cave, width, height, (0, 0))
+    p, c = dijkstra((height - 1, width - 1, cost + 2), width, height, (0, 0))
     cost2 = 1e10
 
     for row, col, m in c.keys():
         if (row, col) == (0, 0):
             cost2 = min(c[(row, col, m)], cost2)
 
-    p, c = dijkstra((0, 0, cost + 1 + cost2 + 2), cave, width, height, (height - 1, width - 1))
+    p, c = dijkstra((0, 0, cost + 1 + cost2 + 2), width, height, (height - 1, width - 1))
     cost3 = 1e10
 
     for row, col, m in c.keys():
@@ -45,34 +48,35 @@ def day24():
     print('Part 2:', cost + 1 + cost2 + 1 + cost3 + 1)
 
 
-def print_cave(minute, cave, w, h):
+def print_cave(minute, w, h):
     for r in range(-1, h + 1):
         for c in range(-1, w + 1):
             print(get_spot(r, c, minute, cave, w, h), end='')
         print('')
 
 
-def get_neighbors(row, col, minute, cave, w, h):
+def get_neighbors(row, col, minute, w, h):
     neighbors = []
-    up = get_spot(row - 1, col, minute, cave, w, h)
+    up = get_spot(row - 1, col, minute, w, h)
     if up == '.':
         neighbors.append((row - 1, col, minute))
-    down = get_spot(row + 1, col, minute, cave, w, h)
+    down = get_spot(row + 1, col, minute, w, h)
     if down == '.':
         neighbors.append((row + 1, col, minute))
-    left = get_spot(row, col - 1, minute, cave, w, h)
+    left = get_spot(row, col - 1, minute, w, h)
     if left == '.':
         neighbors.append((row, col - 1, minute))
-    right = get_spot(row, col + 1, minute, cave, w, h)
+    right = get_spot(row, col + 1, minute, w, h)
     if right == '.':
         neighbors.append((row, col + 1, minute))
-    still = get_spot(row, col, minute, cave, w, h)
+    still = get_spot(row, col, minute, w, h)
     if still == '.':
         neighbors.append((row, col, minute))
     return neighbors
 
 
-def get_spot(row, col, minute, cave, w, h):
+@cache
+def get_spot(row, col, minute, w, h):
     if row == -1 and col == 0:
         return '.'
     if row == h and col == w - 1:
@@ -81,18 +85,18 @@ def get_spot(row, col, minute, cave, w, h):
         return '#'
     if minute == 0:
         return cave[(row, col)]
-    a = get_spot((row - minute) % h, col, 0, cave, w, h)
+    a = get_spot((row - minute) % h, col, 0, w, h)
     if a == '#':
         return '#'
     if a != 'v':
         a = ''
-    b = get_spot((row + minute) % h, col, 0, cave, w, h)
+    b = get_spot((row + minute) % h, col, 0, w, h)
     if b != '^':
         b = ''
-    c = get_spot(row, (col - minute) % w, 0, cave, w, h)
+    c = get_spot(row, (col - minute) % w, 0, w, h)
     if c != '>':
         c = ''
-    d = get_spot(row, (col + minute) % w, 0, cave, w, h)
+    d = get_spot(row, (col + minute) % w, 0, w, h)
     if d != '<':
         d = ''
     res = a + b + c + d
@@ -103,7 +107,7 @@ def get_spot(row, col, minute, cave, w, h):
     return str(len(res))
 
 
-def dijkstra(starting_node, cave, width, height, end_node):
+def dijkstra(starting_node, width, height, end_node):
     visited = set()
     parents_map = {}
     pq = []
@@ -117,7 +121,7 @@ def dijkstra(starting_node, cave, width, height, end_node):
 
         r, c, m = node
 
-        for adj_node in get_neighbors(r, c, m + 1, cave, width, height):
+        for adj_node in get_neighbors(r, c, m + 1, width, height):
             if adj_node in visited:
                 continue
 
